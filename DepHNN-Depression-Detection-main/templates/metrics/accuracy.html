@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Metric - Accuracy</title>
+    <link rel="stylesheet" href="{% static 'style_v2.css' %}?v=801">
+</head>
+<body class="logged-in metric-page">
+
+    <div class="welcome-bar">
+        <a href="{% url 'dashboard' %}" class="nav-back-btn">← Dashboard</a>
+    </div>
+
+    <div class="container metric-container">
+        <h1>Model Accuracy History</h1>
+        
+        <div class="image-box">
+            <img src="{% static 'images/model_accuracy_plot.png' %}" alt="Model Accuracy Plot">
+        </div>
+
+        <div class="explanation-box">
+            <h3>Training vs. Validation Accuracy</h3>
+            <p>
+                This graph tracks the <strong>Classification Accuracy</strong> over 100 training epochs.
+                Accuracy measures the percentage of correct predictions; therefore, a <strong>higher value is better</strong>.
+            </p>
+            
+            <ul style="margin-top: 15px; line-height: 1.6;">
+                <li>
+                    <strong style="color: #3b82f6;">Blue Line (Training Accuracy):</strong> 
+                    Shows the model's performance on the training data. It quickly approaches 99%.
+                </li>
+                <li>
+                    <strong style="color: #f97316;">Orange Line (Validation Accuracy):</strong> 
+                    Shows the model's performance on unseen validation data. It stabilizes at over <strong>98%</strong>.
+                </li>
+            </ul>
+
+            <div style="margin-top: 20px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p><strong>Conclusion:</strong> The high validation accuracy (tracking closely with training accuracy) demonstrates that the model has successfully learned the features of depression and can reliably generalize to new patients.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

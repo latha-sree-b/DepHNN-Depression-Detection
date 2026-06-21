@@ -1,0 +1,41 @@
+# --- Python & Django Internals ---
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
+local_settings.py
+
+# --- Database (CRITICAL: Do not upload this!) ---
+db.sqlite3
+
+# --- Virtual Environment ---
+env/
+venv/
+.venv/
+
+# --- Environment Variables (Secrets) ---
+.env
+
+# --- Media & User Uploads ---
+# We ignore patient files to protect privacy and save space
+media/
+media/uploads/
+
+# --- Large Data Files (GitHub has a 100MB limit) ---
+# Ignore the raw datasets and preprocessed arrays
+Data/
+*.edf
+*.npy
+
+# --- Operating System Files ---
+.DS_Store
+Thumbs.db
+
+# --- IDE Settings (Optional) ---
+.vscode/
+.idea/
+
+# --- EXCEPTIONS (Files we WANT to keep despite rules above) ---
+# We want to keep the specific synthetic test file for the judges to use
+!synthetic_test_patient.edf

@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Metric - Confusion Matrix</title>
+    <link rel="stylesheet" href="{% static 'style_v2.css' %}?v=801">
+</head>
+<body class="logged-in metric-page">
+
+    <div class="welcome-bar">
+        <a href="{% url 'dashboard' %}" class="nav-back-btn">← Dashboard</a>
+    </div>
+
+    <div class="container metric-container">
+        <h1>Model Confusion Matrix</h1>
+        
+        <div class="image-box">
+            <img src="{% static 'images/confusion_matrix.png' %}" alt="Confusion Matrix">
+        </div>
+
+        <div class="explanation-box">
+            <h3>Performance Analysis</h3>
+            <p>
+                This matrix evaluates the model on <strong>1,737 unseen test samples</strong>. 
+                The diagonal values (dark blue) represent correct predictions, while the off-diagonal values represent errors.
+            </p>
+            
+            <ul style="margin-top: 15px; line-height: 1.6;">
+                <li>
+                    <strong style="color: #10b981;">True Negatives (846):</strong> 
+                    Healthy subjects correctly identified as <em>Healthy</em>.
+                </li>
+                <li>
+                    <strong style="color: #10b981;">True Positives (861):</strong> 
+                    Depressed subjects correctly identified as <em>Depressed</em>.
+                </li>
+                <li>
+                    <strong style="color: #ef4444;">False Positives (10):</strong> 
+                    Healthy subjects incorrectly flagged as Depressed (False Alarm).
+                </li>
+                <li>
+                    <strong style="color: #ef4444;">False Negatives (20):</strong> 
+                    Depressed subjects incorrectly missed and labeled as Healthy.
+                </li>
+            </ul>
+
+            <div style="margin-top: 20px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p><strong>Conclusion:</strong> The model achieved an overall accuracy of <strong>98.27%</strong>, with a very low error rate (only 30 errors out of 1,737 cases), demonstrating high reliability for screening purposes.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

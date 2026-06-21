@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - DepHNN</title>
+    <link rel="stylesheet" href="{% static 'style_v2.css' %}?v=600">
+</head>
+<body class="logged-out">
+
+    <div class="container container-register" style="max-width: 500px;">
+        <h1>Create Account</h1>
+        <p class="subtitle">Join the DepHNN platform to analyze signals.</p>
+
+        <form method="post" class="auth-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn" style="margin-top: 1rem;">Register</button>
+        </form>
+        
+        <div style="text-align: center; margin-top: 1.5rem;">
+            <a href="{% url 'home' %}">Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DepHNN - Welcome</title>
+    <link rel="stylesheet" href="{% static 'style_v2.css' %}?v=701">
+</head>
+<body class="logged-out"> <div class="landing-page-nav">
+        <div class="nav-links">
+            <a href="{% url 'about' %}" class="nav-btn-primary">About</a>
+            <a href="{% url 'contact' %}" class="nav-btn-primary">Contact</a>
+            <a href="{% url 'login' %}" class="nav-btn-secondary">Log In</a>
+            <a href="{% url 'register' %}" class="nav-btn-primary">Sign Up</a>
+        </div>
+    </div>
+
+    <div class="landing-page-content">
+        <h1>DepHNN Analyzer</h1>
+        <p class="subtitle">AI-Powered EEG Screening System</p>
+        <p style="max-width: 600px; margin: 20px auto; color: rgba(255,255,255,0.9); line-height: 1.6;">
+            Utilizing a state-of-the-art Hybrid Neural Network (CNN-LSTM),
+            this tool provides advanced screening for depression by
+            analyzing raw EEG signal data.
+        </p>
+    </div>
+
+</body>
+</html>

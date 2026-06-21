@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DepHNN - Analyzer Tool</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="{% static 'style_v2.css' %}?v=801">
+</head>
+<body class="logged-in">
+
+    <video autoplay muted loop id="bg-video">
+        <source src="{% static 'background.mp4' %}" type="video/mp4">
+    </video>
+
+    <div class="welcome-bar">
+        <div class="nav-left" style="display: flex; align-items: center; gap: 20px;">
+            <a href="{% url 'dashboard' %}" class="nav-back-btn" style="color: white; text-decoration: none; font-weight: bold;">← Dashboard</a>
+            <span style="color: #e2e8f0; font-size: 1.1rem;">EEG Analysis Tool</span>
+        </div>
+        <div class="nav-links">
+            <button onclick="openLogoutModal()" class="logout-btn">Log Out</button>
+        </div>
+    </div>
+
+    <div class="container" style="margin-top: 80px;">
+        <h1>🧠 EEG Signal Analyzer</h1>
+        <p class="subtitle">Upload an .edf file to begin screening.</p>
+        
+        <div class="upload-box" onclick="document.getElementById('fileInput').click()">
+            <div class="icon">📁</div>
+            <p><strong>Drag & drop your EEG file here</strong><br>or click to browse</p>
+            <input type="file" id="fileInput" accept=".edf">
+            <p id="fileName"></p>
+        </div>
+        
+        <button class="btn" onclick="analyze('{{ csrf_token }}')" id="analyzeBtn">Analyze EEG Signal</button>
+        
+        <div id="loading"><div class="spinner"></div><p><strong>Processing EEG Signal...</strong></p></div>
+        
+        <div id="results" style="display: none;">
+            <div id="predictionBox" class="result-card">
+                <h2 id="predictionText"></h2>
+                <p id="confidenceText"></p>
+            </div>
+            
+            <div class="chart-container">
+                <canvas id="probChart"></canvas>
+            </div>
+
+            <div class="details">
+                <h3>📋 Clinical Details</h3>
+                <ul id="detailsList"></ul>
+            </div>
+
+            <div id="adviceBox" class="details" style="margin-top: 20px;">
+                <h3 id="adviceTitle">💡 Recommendations</h3>
+                <ul id="adviceList" style="padding-left: 20px;"></ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="logout-modal-backdrop" class="modal-backdrop"></div>
+    <div id="logout-modal" class="modal-content">
+        <h2>Are you sure?</h2>
+        <p>You will be logged out of your session.</p>
+        <div class="modal-buttons">
+            <button onclick="closeLogoutModal()" class="modal-btn-secondary">Stay Back</button>
+            <a href="{% url 'custom_logout' %}" class="modal-btn-danger">Log Out</a>
+        </div>
+    </div>
+
+    <script src="{% static 'script.js' %}?v=900"></script>
+</body>
+</html>

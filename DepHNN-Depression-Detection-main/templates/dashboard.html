@@ -1,0 +1,86 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DepHNN - Dashboard</title>
+    <link rel="stylesheet" href="{% static 'style_v2.css' %}?v=901">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="logged-in dashboard-mode">
+    
+    <video autoplay muted loop id="bg-video">
+        <source src="{% static 'background.mp4' %}" type="video/mp4">
+    </video>
+
+    <div class="welcome-bar">
+        <div class="brand">
+            <i class="fa-solid fa-brain"></i> DepHNN
+        </div>
+        <div class="user-info">
+            <span>Hello, <strong>{{ user.username }}</strong></span>
+            <button onclick="openLogoutModal()" class="logout-btn-small" title="Log Out">
+                <i class="fa-solid fa-power-off"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="dashboard-container">
+        <div class="dash-header">
+            <h1>System Dashboard</h1>
+            <p>Select a module to continue</p>
+        </div>
+
+        <div class="bento-grid">
+            <a href="{% url 'analyzer' %}" class="bento-card main-tool">
+                <div class="card-content">
+                    <div class="icon-box main"><i class="fa-solid fa-microchip"></i></div>
+                    <div class="text-box">
+                        <h2>Run Diagnosis</h2>
+                        <p>Upload EEG .edf files for AI analysis</p>
+                    </div>
+                    <div class="arrow-icon" style="font-size: 1.5rem; margin-left: auto;">→</div>
+                </div>
+            </a>
+
+            <a href="{% url 'metrics_cm' %}" class="bento-card">
+                <div class="icon-box"><i class="fa-solid fa-table-cells"></i></div>
+                <h3>Confusion Matrix</h3>
+                <p>View Test Performance</p>
+            </a>
+
+            <a href="{% url 'metrics_accuracy' %}" class="bento-card">
+                <div class="icon-box"><i class="fa-solid fa-chart-line"></i></div>
+                <h3>Accuracy</h3>
+                <p>Training Curves</p>
+            </a>
+
+            <a href="{% url 'metrics_loss' %}" class="bento-card">
+                <div class="icon-box"><i class="fa-solid fa-trend-down"></i></div>
+                <h3>Loss Function</h3>
+                <p>Error Minimization</p>
+            </a>
+            
+            <a href="{% url 'about' %}" class="bento-card small">
+                <i class="fa-solid fa-circle-info" style="margin-right: 10px;"></i> About Project
+            </a>
+             <a href="{% url 'contact' %}" class="bento-card small">
+                <i class="fa-solid fa-envelope" style="margin-right: 10px;"></i> Contact Team
+            </a>
+        </div>
+    </div>
+
+    <div id="logout-modal-backdrop" class="modal-backdrop"></div>
+    <div id="logout-modal" class="modal-content">
+        <h2>Sign Out?</h2>
+        <p>You will need to log in again to access the system.</p>
+        <div class="modal-buttons">
+            <button onclick="closeLogoutModal()" class="modal-btn-secondary">Cancel</button>
+            <a href="{% url 'custom_logout' %}" class="modal-btn-danger">Log Out</a>
+        </div>
+    </div>
+    
+    <script src="{% static 'script.js' %}?v=901"></script>
+</body>
+</html>

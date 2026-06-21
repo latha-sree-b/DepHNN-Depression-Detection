@@ -1,0 +1,736 @@
+/* --- Root: Global Colors --- */
+:root {
+    --primary: #3b82f6;
+    --primary-dark: #1d4ed8;
+    --success: #10b981;
+    --danger: #ef4444;
+    --text-dark: #1e293b;
+    --text-gray: #64748b;
+    --light-gray-btn: #f3f4f6;
+    --light-gray-btn-hover: #e5e7eb;
+}
+
+/* --- Body: Base and Backgrounds --- */
+body {
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    color: var(--text-dark);
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* 1. Logged-Out State (Solid Color BG) */
+body.logged-out {
+    background: #111827; /* Dark blue/purple */
+    padding: 0;
+}
+
+/* 2. Logged-In State (Video BG) */
+body.logged-in {
+    background-color: #0f172a; /* Fallback color */
+    padding: 20px;
+}
+
+body.logged-in #bg-video {
+    position: fixed !important;
+    right: 0; bottom: 0;
+    min-width: 100%; min-height: 100%;
+    width: auto; height: auto;
+    object-fit: cover;
+    z-index: -3 !important;
+}
+
+body.logged-in::after {
+    content: '';
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(15, 23, 42, 0.7);
+    z-index: -2 !important;
+}
+
+/* --- Navigation Bars --- */
+
+/* 1. Logged-Out Nav (Landing Page) */
+.landing-page-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: flex-end;
+    box-sizing: border-box;
+    z-index: 100;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+/* Base style for nav buttons */
+.nav-btn-secondary,
+.nav-btn-primary {
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.05rem;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+/* 'Log In' button (Blue) */
+.nav-btn-secondary {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+}
+.nav-btn-secondary:hover {
+    background: var(--primary-dark);
+    border-color: var(--primary-dark);
+    transform: translateY(-1px);
+}
+
+/* 'Sign Up', 'About', 'Contact' (Light) */
+.nav-btn-primary {
+    background: var(--light-gray-btn);
+    color: var(--primary-dark);
+    border-color: #d1d5db;
+}
+.nav-btn-primary:hover {
+    background: var(--light-gray-btn-hover);
+    transform: translateY(-1px);
+}
+
+/* 2. Logged-In Nav (Welcome Bar) */
+.welcome-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(15, 23, 42, 0.9);
+    color: #e2e8f0;
+    padding: 10px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    box-sizing: border-box;
+}
+.welcome-bar strong {
+    color: #fff;
+    font-weight: 600;
+}
+
+/* 'About' / 'Contact' buttons (Logged-In) */
+.welcome-bar .nav-links a {
+    background: var(--light-gray-btn);
+    color: var(--primary-dark);
+    border-color: #d1d5db;
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+.welcome-bar .nav-links a:hover {
+    background: var(--light-gray-btn-hover);
+    transform: translateY(-1px);
+}
+
+/* 'Log Out' button (Red) */
+.logout-btn {
+    background: var(--danger);
+    color: #fff;
+    padding: 8px 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.2s, transform 0.2s;
+    cursor: pointer;
+    border: none;
+    font-size: 0.95rem;
+}
+.logout-btn:hover {
+    background: #dc2626;
+    transform: translateY(-1px);
+}
+
+/* --- Page Content --- */
+
+/* 1. Logged-Out Content (Centered Text) */
+.landing-page-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
+    color: white;
+    padding: 20px;
+    z-index: 10;
+    position: relative;
+}
+.landing-page-content h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 1rem;
+    letter-spacing: -1px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+.landing-page-content p {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 600px; 
+    line-height: 1.6;
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* 2. Logged-In Content (Glass Box) */
+.container {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    width: 100%;
+    max-width: 550px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    position: relative;
+    z-index: 1;
+}
+
+/* Override h1 color for the glass container */
+.container h1 {
+    color: var(--text-dark);
+}
+
+/* Login/Register/About/Contact Box Styling */
+.container-login,
+.container-register {
+    background: #f8f9fa !important;
+    backdrop-filter: none !important;
+    color: #212529 !important;
+    border: 1px solid #dee2e6 !important;
+}
+.container-login h1, .container-register h1 {
+    color: var(--text-dark) !important;
+}
+.container-login .subtitle, .container-register .subtitle {
+    color: #6c757d !important;
+}
+.container-login a, .container-register a {
+    color: var(--primary) !important;
+}
+
+
+/* --- Analyzer Components (Inside .container) --- */
+.subtitle {
+    text-align: center;
+    color: var(--text-gray);
+    margin-top: 0;
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+}
+.upload-box {
+    background: #f8fafc;
+    border: 2px dashed #cbd5e1;
+    border-radius: 12px;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 1.5rem;
+}
+.upload-box:hover {
+    border-color: var(--primary);
+    background: #eff6ff;
+    transform: translateY(-2px);
+}
+.icon {
+    font-size: 2.5rem;
+    color: var(--primary);
+    opacity: 0.5;
+    margin-bottom: 0.5rem;
+}
+#fileInput {
+    display: none;
+}
+#fileName {
+    color: var(--primary);
+    font-weight: 600;
+    margin-top: 1rem;
+    word-break: break-all;
+    font-size: 0.9rem;
+    background: #dbeafe;
+    padding: 4px 8px;
+    border-radius: 4px;
+    display: inline-block;
+}
+.btn {
+    background: var(--primary);
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    border: none;
+    padding: 14px;
+    width: 100%;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, opacity 0.2s;
+    box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.5);
+}
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.5);
+}
+.btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+#loading {
+    display: none;
+    text-align: center;
+    margin-top: 2rem;
+    animation: fadeIn 0.3s ease-in;
+}
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #e2e8f0;
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 15px;
+}
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+#results {
+    display: none;
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 2px solid #f1f5f9;
+    animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.result-card {
+    padding: 1.5rem;
+    border-radius: 12px;
+    text-align: center;
+    margin-bottom: 2rem;
+    box-shadow: inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
+}
+.healthy {
+    background-color: #ecfdf5;
+    color: #047857;
+    border: 1px solid #a7f3d0;
+}
+.depressed {
+    background-color: #fef2f2;
+    color: #b91c1c;
+    border: 1px solid #fecaca;
+}
+#predictionText {
+    margin: 0;
+    font-size: 2rem;
+    letter-spacing: -1px;
+    font-weight: 800;
+}
+#confidenceText {
+    margin: 0.5rem 0 0;
+    font-size: 1rem;
+    opacity: 0.8;
+    font-weight: 500;
+}
+.details {
+    background: #f8fafc;
+    padding: 1.5rem;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    color: var(--text-dark);
+    border: 1px solid #e2e8f0;
+}
+.details h3 {
+    margin-top: 0;
+    color: var(--text-gray);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.details ul {
+    margin: 1rem 0 0;
+    padding-left: 1.2rem;
+}
+.details li {
+    margin-bottom: 0.8rem;
+    line-height: 1.5;
+}
+
+/* --- Logout Modal Styles (with Z-Index fix) --- */
+/* This is the *only* modal style block */
+.modal-backdrop {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(5px);
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    z-index: 9998 !important;
+}
+
+/* Hide the main video overlay when modal is open */
+body.modal-open::after {
+    display: none !important;
+}
+
+.modal-content {
+    display: none;
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%) scale(0.95);
+    background: white;
+    padding: 1.5rem 2rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    z-index: 9999 !important;
+    width: 90%;
+    max-width: 400px;
+    opacity: 0;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.modal-visible {
+    display: block;
+}
+.fade-in {
+    opacity: 1 !important;
+    transform: translate(-50%, -50%) scale(1);
+}
+.modal-content h2 {
+    margin-top: 0;
+    color: var(--text-dark);
+}
+.modal-buttons {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+.modal-btn-secondary, .modal-btn-danger {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 0.9rem;
+    display: inline-block;
+}
+.modal-btn-secondary {
+    background: #e2e8f0;
+    color: #334155;
+}
+.modal-btn-secondary:hover {
+    background: #cbd5e1;
+}
+.modal-btn-danger {
+    background: var(--danger);
+    color: white;
+}
+.modal-btn-danger:hover {
+    background: #dc2626;
+}
+
+/* --- New Dashboard Styles --- */
+
+/* Solid background for landing page */
+.landing-body {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+}
+
+/* Dashboard Container */
+.dashboard-container {
+    max-width: 1000px;
+    margin: 100px auto;
+    text-align: center;
+    color: white;
+    padding: 20px;
+}
+
+/* Grid for the cards */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+    margin-top: 40px;
+}
+
+/* The individual cards */
+.dash-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 30px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    color: white;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dash-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* Special styling for the main tool card */
+.dash-card.main-tool {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(147, 51, 234, 0.2));
+    border-color: rgba(59, 130, 246, 0.4);
+}
+
+.dash-card .icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.dash-card h2 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+}
+
+.dash-card p {
+    font-size: 0.9rem;
+    color: #ccc;
+}
+
+/* Back button style */
+.nav-back-btn {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.1);
+    transition: background 0.2s;
+    margin-right: 20px;
+}
+.nav-back-btn:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+/* Styles for metric pages */
+.metric-container {
+    max-width: 900px;
+}
+.image-box {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+}
+.image-box img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+.explanation-box {
+    text-align: left;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 25px;
+    border-radius: 15px;
+}
+.explanation-box h3 {
+    margin-top: 0;
+    color: #3b82f6;
+}
+.explanation-box ul {
+    padding-left: 20px;
+    color: #ddd;
+}
+.explanation-box li {
+    margin-bottom: 10px;
+}
+/* --- BENTO DASHBOARD STYLES --- */
+
+.dashboard-container {
+    max-width: 900px;
+    margin: 80px auto;
+    padding: 20px;
+}
+
+.dash-header {
+    text-align: center;
+    margin-bottom: 40px;
+    color: white;
+}
+.dash-header h1 { font-size: 2.5rem; margin-bottom: 10px; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+.dash-header p { color: rgba(255,255,255,0.8); font-size: 1.1rem; }
+
+/* The Grid Layout */
+.bento-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 Columns */
+    grid-template-rows: auto auto;
+    gap: 20px;
+}
+
+/* Common Card Styles */
+.bento-card {
+    background: rgba(255, 255, 255, 0.07); /* Very subtle glass */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    padding: 25px;
+    text-decoration: none;
+    color: white;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Hover Effects */
+.bento-card:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+}
+
+/* The "Main Tool" spans 3 columns (full width) */
+.bento-card.main-tool {
+    grid-column: span 3;
+    background: linear-gradient(90deg, rgba(59, 130, 246, 0.2), rgba(147, 51, 234, 0.2));
+    border: 1px solid rgba(59, 130, 246, 0.5);
+    padding: 40px;
+}
+
+.bento-card.main-tool .card-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+}
+
+/* Icons */
+.icon-box {
+    width: 50px;
+    height: 50px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #60a5fa; /* Light Blue */
+}
+.icon-box.main {
+    width: 70px;
+    height: 70px;
+    font-size: 2rem;
+    background: rgba(59, 130, 246, 0.3);
+    color: white;
+    margin-bottom: 0;
+}
+
+/* Text */
+.bento-card h3 { margin: 0 0 5px 0; font-size: 1.2rem; }
+.bento-card p { margin: 0; font-size: 0.9rem; color: rgba(255,255,255,0.6); }
+
+/* Small Cards (About/Contact) */
+.bento-card.small {
+    grid-column: span 1; /* Takes 1 column but wide width if needed, adjust grid */
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 20px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.8);
+}
+/* Fix the small card grid placement */
+.bento-grid .small:nth-last-child(2) { grid-column: span 1; } /* About */
+.bento-grid .small:last-child { grid-column: span 2; } /* Contact spans 2 */
+
+/* Specific Header adjustments for Dashboard */
+.welcome-bar .brand { font-size: 1.2rem; font-weight: bold; letter-spacing: 1px; }
+.welcome-bar .user-info { display: flex; gap: 15px; align-items: center; }
+.logout-btn-small {
+    background: rgba(239, 68, 68, 0.2);
+    color: #fca5a5;
+    border: 1px solid rgba(239, 68, 68, 0.5);
+    width: 35px; height: 35px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.logout-btn-small:hover { background: #ef4444; color: white; }
+
+/* --- Metric Page Text Fixes --- */
+
+.explanation-box {
+    text-align: left;
+    /* Make background slightly darker for better contrast */
+    background: rgba(15, 23, 42, 0.8) !important; 
+    padding: 25px;
+    border-radius: 15px;
+    margin-top: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    
+    /* FORCE ALL TEXT TO BE WHITE/LIGHT */
+    color: #f8fafc !important;
+}
+
+/* Header Color (Light Blue) */
+.explanation-box h3 {
+    margin-top: 0;
+    color: #60a5fa !important; 
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+/* Paragraphs and Lists (Light Gray) */
+.explanation-box p, 
+.explanation-box ul, 
+.explanation-box li {
+    color: #e2e8f0 !important;
+    line-height: 1.6;
+}
+
+/* Bold Text (Pure White) */
+.explanation-box strong {
+    color: #ffffff !important;
+    font-weight: 700;
+}
+
+/* --- FIX FOR BLACK BOX BUG --- */
+/* This hides the video overlay when the modal is open */
+body.modal-open::after {
+    display: none !important;
+}
